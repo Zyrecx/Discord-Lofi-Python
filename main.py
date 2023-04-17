@@ -20,7 +20,7 @@ async def on_wavelink_node_ready(node: wavelink.Node):
 @bot.event
 async def on_ready():
     await bot.loop.create_task(connect_nodes())
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="lofi for Zyrex"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="lofi for you"))
     print("READY")
 
 async def join_vc():
@@ -48,4 +48,5 @@ async def on_voice_state_update(member, before, after):
             voice = node.get_player(guild)
             if len(vc.members) <= 1 and voice is not None:
                 await voice.disconnect()
+                
 bot.run(config.TOKEN)

@@ -33,20 +33,25 @@ async def join_vc():
 
 @bot.event
 async def on_voice_state_update(member, before, after):
-        if after.channel is not None:
-            if after.channel.id == config.VC:  
+        try:
+                channel = after.channel.id
+        except:
+                channel = None
+                
+        if channel == config.VC:
                 node = wavelink.NodePool.get_node()
                 guild = await bot.fetch_guild(config.GUILD)
                 voice = node.get_player(guild)
                 if voice is None:
-                    await join_vc()
-                    
-        elif before.channel and not after.channel:  
-            vc = await bot.fetch_channel(config.VC)  
-            node = wavelink.NodePool.get_node()
-            guild = await bot.fetch_guild(config.GUILD)
-            voice = node.get_player(guild)
-            if len(vc.members) <= 1 and voice is not None:
+                        await join_vc()
+                        return
+                return
+        node = wavelink.NodePool.get_node()
+        guild = await bot.fetch_guild(config.GUILD)
+        voice = node.get_player(guild)           
+        vc = await bot.fetch_channel(config.VC)
+        if len(vc.members) <= 1 and voice is not None:
                 await voice.disconnect()
+
                 
 bot.run(config.TOKEN)

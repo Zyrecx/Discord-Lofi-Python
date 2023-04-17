@@ -9,6 +9,7 @@ To use this bot, you will need to install the following libraries using pip:
 ```
 pip install discord
 pip install wavelink==1.3.5
+pip install PyNaCl
 ```
 
 ## Configuration

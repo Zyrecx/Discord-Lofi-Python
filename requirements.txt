@@ -1,0 +1,3 @@
+discord
+wavelink==1.3.5
+install PyNaCl
